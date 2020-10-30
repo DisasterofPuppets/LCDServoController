@@ -245,25 +245,38 @@ clearscreen();
 
             if (Button1 == 0){
               Sangle = 90;
+                 for (int i = 0; i <= 15; i++) {
+                        pwm.setPWM(i,0,angleToPulse(90));
+                        delay(10);
+                 }
             }
 
-            if (Button2 >= 0){
-              Sangle = Sangle -1;
+            if (Button2 == 0){
+              if (Sangle >= 1){
+                  Sangle = Sangle -1;
+                  for (int i = 0; i <= 15; i++) {
+                          pwm.setPWM(i,0,angleToPulse(Sangle));
+                          delay(10);
+                    }
+              } 
             }
 
-            if (Button3 <= 180){
-              Sangle = Sangle +1;
+            if (Button3 == 0){
+              if (Sangle <= 179){            
+                 Sangle = Sangle +1;
+                 for (int i = 0; i <= 15; i++) {
+                          pwm.setPWM(i,0,angleToPulse(Sangle));
+                          delay(10);
+                    }
+              }
             }
 
               if (Button4 == 0){
               Fmanual = false;
               }
-       }
-// set servos to 90 with button 1
-//user inputs value using 3 for + or 2 for -
-// this occurs as the user does it
- 
-    clearscreen();     
+
+  }
+    clearscreen();    
 }
 
 void clearscreen(){
