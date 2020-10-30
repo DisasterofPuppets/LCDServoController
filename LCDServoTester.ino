@@ -98,17 +98,17 @@ void menu(){
   Button3 = digitalRead(Button3Pin);
   Button4 = digitalRead(Button4Pin);
 
-  Serial.print("Button 1 : ");
-  Serial.println(Button1);
-  Serial.print("Button 2 : ");
-  Serial.println(Button2);
-  Serial.print("Button 3 : ");
-  Serial.println(Button3);
-  Serial.print("Button 4 : ");
-  Serial.println(Button4);
-  delay(400);
+  //Serial.print("Button 1 : ");
+  //Serial.println(Button1);
+  //Serial.print("Button 2 : ");
+  //Serial.println(Button2);
+  //Serial.print("Button 3 : ");
+  //Serial.println(Button3);
+  //Serial.print("Button 4 : ");
+  //Serial.println(Button4);
+  //delay(400);
   
-  Serial.println("Function Main Menu");
+  //Serial.println("Function Main Menu");
   lcd.setCursor(0, 0);  // Move the cursor at origin
   lcd.print("1 Set to Neutral");
   lcd.setCursor(0, 1);
@@ -120,27 +120,27 @@ void menu(){
  
   
 if (Button1 == 0){
- //seems ok
- Serial.println("You pressed button 1 in the menu function");
+ //Serial.println("You pressed button 1 in the menu function");
  Fninety = true;
  runonce = 0;
  ninety();
 }
   else if (Button2 == 0){
-      Serial.println("You pressed button 2 in the menu function");
+      //Serial.println("You pressed button 2 in the menu function");
       Fsweep = true;  
       runonce = 0;
       sweep();
   }
     else if (Button3 == 0){
 
-      Serial.println("You pressed button 3 in the menu function");
+      //Serial.println("You pressed button 3 in the menu function");
       Fmanual = true;
       runonce = 0;
+      Sangle = 0;
       manual();
   }
     else if (Button4 == 0){ 
-      Serial.println("You pressed button 4 in the menu function");
+      //Serial.println("You pressed button 4 in the menu function");
       menu();
       }
   
@@ -150,9 +150,9 @@ void ninety(){
 
        while (Fninety == true){
            Button4 = digitalRead(Button4Pin);
-           if (runonce == 0) {
-           Serial.println("Servos set to 90");
-           }
+           //if (runonce == 0) {
+           //Serial.println("Servos set to 90");
+           //}
            lcd.setCursor(0, 0);  // Move the cursor at origin
            lcd.print("  Servos set to 90  ");
            lcd.setCursor(0, 1);
@@ -184,9 +184,9 @@ void sweep(){
         while (Fsweep == true){
           
             Button4 = digitalRead(Button4Pin);  
-            Serial.println("Function Servos Sweep");
-            Serial.print("Button 4 : ");
-            Serial.println(Button4);
+           // Serial.println("Function Servos Sweep");
+            //Serial.print("Button 4 : ");
+            //Serial.println(Button4);
             lcd.setCursor(0, 0);  // Move the cursor at origin
             lcd.print("Sweep in Progress   ");
             lcd.setCursor(0, 1);
@@ -195,29 +195,33 @@ void sweep(){
             lcd.print("                    ");
             lcd.setCursor(0, 3);
             lcd.print("                Exit");
+
+            if (Button4 == 0){
+              Fsweep = false;
+              }
          
     
           if (forward == true) {
           for (int i = 0; i <= 180; i++){
                for (int s = 0; s <= 15; s++){ 
                     pwm.setPWM(s,0,angleToPulse(i));
-                    forward = false;
                    }
+                forward = false;
                 }
+                
+                
                
           }
           else if (forward == false) {
           for (int i = 180; i >= 0; i--){
                for (int s = 0; s <= 15; s++){ 
                     pwm.setPWM(s,0,angleToPulse(i));
+                    }
                     forward = true;
-                   }
                 }
           }
 
-            if (Button4 == 0){
-              Fsweep = false;
-              }
+
 
     }   
     clearscreen();  
@@ -226,6 +230,7 @@ void sweep(){
 void manual(){
 
 clearscreen();
+delay(20);
 
        while (Fmanual == true){
           Button1 = digitalRead(Button1Pin); 
@@ -237,7 +242,7 @@ clearscreen();
             lcd.print("Adjust with - & +   ");
             lcd.setCursor(0, 1);
             lcd.print("Current Angle :");
-            lcd.setCursor(0, 2);
+            lcd.setCursor(8, 2);
             lcd.print(Sangle);
             lcd.setCursor(0, 3);
             lcd.print("90    -      +  Exit");
@@ -248,6 +253,7 @@ clearscreen();
                  for (int i = 0; i <= 15; i++) {
                         pwm.setPWM(i,0,angleToPulse(90));
                         delay(10);
+                        
                  }
             }
 
@@ -256,7 +262,8 @@ clearscreen();
                   Sangle = Sangle -1;
                   for (int i = 0; i <= 15; i++) {
                           pwm.setPWM(i,0,angleToPulse(Sangle));
-                          delay(10);
+                          lcd.setCursor(8, 2);
+                          lcd.print("   ");
                     }
               } 
             }
@@ -266,7 +273,8 @@ clearscreen();
                  Sangle = Sangle +1;
                  for (int i = 0; i <= 15; i++) {
                           pwm.setPWM(i,0,angleToPulse(Sangle));
-                          delay(10);
+                          lcd.setCursor(8, 2);
+                          lcd.print("   ");
                     }
               }
             }
@@ -288,5 +296,4 @@ void clearscreen(){
   lcd.print("                    ");
   lcd.setCursor(0, 3);
   lcd.print("1     2     3       ");
-  delay(100);
 }      
