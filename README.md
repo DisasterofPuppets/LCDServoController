@@ -1,3 +1,11 @@
+LCD display 16 simultaneous servo controller
+
+https://www.youtube.com/watch?v=XE3fmpwRJA0
+
+Disaster of Puppets
+YouTube: Http://disasterofpuppets.com
+Twitch: Https://twitch.tv/disasterofpuppets
+
 Parts required
 
 - Arduino Nano
