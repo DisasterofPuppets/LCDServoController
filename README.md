@@ -1,5 +1,9 @@
 LCD display 16 simultaneous servo controller
 
+*New*
+https://youtu.be/qUJ36z6OcFE
+
+Older video:
 https://www.youtube.com/watch?v=XE3fmpwRJA0
 
 Disaster of Puppets
