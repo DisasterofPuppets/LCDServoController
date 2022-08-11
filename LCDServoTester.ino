@@ -24,7 +24,7 @@ Functions
 
 ninety (Menu option #1)
 =====
-Sets all servos yo 90 degrees
+Sets all servos to 90 degrees
 
 sweep (Menu option #2)
 =====
